@@ -1,0 +1,20 @@
+server:
+  port: 9000
+  
+  
+spring:
+  application:
+    name: gateway-service  
+  cloud:
+    gateway:
+      routes:
+      - id: authservice
+        uri: http://localhost:8081/
+        predicates:        - Path=/register/**
+      - id: loanservice
+        uri: http://localhost:8082/
+        predicates:        - Path=/loan/**
+      - id: loginservice
+        uri: http://172.19.4.145:9090/
+        predicates:
+        - Path=/login/**  mvc:    pathmatch:      matching-strategy: ant-path-matcher
